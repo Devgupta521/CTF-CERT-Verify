@@ -2,11 +2,15 @@
 let certificates = {};
 
 async function loadCertificates() {
+  const message = document.getElementById("message");
+
   try {
-    const response = await fetch("./certificates.json");
+    const response = await fetch("./certificates.json", {
+      cache: "no-store"
+    });
 
     if (!response.ok) {
-      throw new Error("Unable to load database");
+      throw new Error(`Database request failed: ${response.status}`);
     }
 
     certificates = await response.json();
@@ -20,10 +24,10 @@ async function loadCertificates() {
     }
 
   } catch (error) {
-    document.getElementById("message").textContent =
-      "Certificate database is currently unavailable.";
+    message.textContent =
+      "Certificate database is unavailable. Please try again later.";
 
-    console.error(error);
+    console.error("Certificate database error:", error);
   }
 }
 
@@ -40,6 +44,7 @@ function verifyCertificate() {
   message.textContent = "";
   qrContainer.replaceChildren();
   image.hidden = true;
+  image.removeAttribute("src");
 
   if (!id) {
     message.textContent = "Enter a certificate ID.";
@@ -144,25 +149,6 @@ function verifyCertificate() {
     window.print();
   };
 
-  // Download QR code
-  document.getElementById("downloadQR").onclick = () => {
-    const canvas = qrContainer.querySelector("canvas");
-
-    if (!canvas) {
-      message.textContent = "QR code is not ready.";
-      return;
-    }
-
-    const link = document.createElement("a");
-
-    link.download = `${id}-QR.png`;
-    link.href = canvas.toDataURL("image/png");
-
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  };
-
   // Update browser URL
   history.replaceState(null, "", verificationURL.href);
 }
@@ -175,4 +161,5 @@ document.getElementById("certificateId")
     }
   });
 
+// Load certificate database
 loadCertificates();
