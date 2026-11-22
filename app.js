@@ -1,11 +1,19 @@
 
 let certificates = {};
 
+const PORTAL_URL =
+  "https://devgupta521.github.io/CTF-CERT-Verify/";
+
 async function loadCertificates() {
   const message = document.getElementById("message");
 
   try {
-    const response = await fetch("./certificates.json", {
+    const databaseURL = new URL(
+      "certificates.json",
+      PORTAL_URL
+    );
+
+    const response = await fetch(databaseURL.href, {
       cache: "no-store"
     });
 
@@ -25,9 +33,9 @@ async function loadCertificates() {
 
   } catch (error) {
     message.textContent =
-      "Certificate database is unavailable. Please try again later.";
+      "Certificate database unavailable. Please try again later.";
 
-    console.error("Certificate database error:", error);
+    console.error("Database error:", error);
   }
 }
 
@@ -102,41 +110,48 @@ function verifyCertificate() {
   });
 
   // Display certificate image
-  image.src = certificate.certificate;
-  image.hidden = false;
+  if (certificate.certificate) {
+    image.src = new URL(
+      certificate.certificate,
+      PORTAL_URL
+    ).href;
 
-  image.onerror = () => {
-    image.hidden = true;
-  };
+    image.hidden = false;
 
-  // Generate unique verification URL
-  const verificationURL = new URL(
-    window.location.pathname,
-    window.location.origin
-  );
-
-  verificationURL.searchParams.set("id", id);
-
-  // Generate QR code
-  if (typeof QRCode === "undefined") {
-    message.textContent = "QR code library unavailable.";
-    return;
+    image.onerror = () => {
+      image.hidden = true;
+    };
   }
 
-  new QRCode(qrContainer, {
-    text: verificationURL.href,
-    width: 200,
-    height: 200,
-    colorDark: "#06111f",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
-  });
+  // Generate the permanent QR verification URL
+  const verificationURL =
+    PORTAL_URL + "?id=" + encodeURIComponent(id);
+
+  if (typeof QRCode !== "undefined") {
+    new QRCode(qrContainer, {
+      text: verificationURL,
+      width: 200,
+      height: 200,
+      colorDark: "#06111f",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  } else {
+    message.textContent = "QR code library unavailable.";
+  }
 
   // Download certificate
-  document.getElementById("downloadBtn").onclick = () => {
-    const link = document.createElement("a");
+  const downloadBtn = document.getElementById("downloadBtn");
 
-    link.href = certificate.certificate;
+  downloadBtn.onclick = () => {
+    if (!certificate.certificate) return;
+
+    const link = document.createElement("a");
+    link.href = new URL(
+      certificate.certificate,
+      PORTAL_URL
+    ).href;
+
     link.download = certificate.certificate.split("/").pop();
 
     document.body.appendChild(link);
@@ -149,8 +164,12 @@ function verifyCertificate() {
     window.print();
   };
 
-  // Update browser URL
-  history.replaceState(null, "", verificationURL.href);
+  // Update address bar
+  history.replaceState(
+    null,
+    "",
+    PORTAL_URL + "?id=" + encodeURIComponent(id)
+  );
 }
 
 // Enter key verification
