@@ -1,0 +1,287 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #06111f;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+header {
+  padding: 22px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #193653;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  background: #087fd5;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.brand h2 {
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.brand small {
+  color: #40b6ff;
+  font-size: 10px;
+}
+
+header a {
+  color: #54bdff;
+  text-decoration: none;
+}
+
+.hero {
+  max-width: 780px;
+  margin: 90px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid #17649b;
+  color: #54bdff;
+  border-radius: 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: clamp(34px, 6vw, 55px);
+  margin: 28px 0 16px;
+}
+
+h1 span {
+  color: #39adff;
+}
+
+.hero > p {
+  color: #9fb2c6;
+  line-height: 1.7;
+}
+
+.search-box,
+.result {
+  margin-top: 40px;
+  padding: 30px;
+  background: #0c1d31;
+  border: 1px solid #1b4569;
+  border-radius: 15px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+  color: #c8d9eb;
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #315776;
+  background: #071525;
+  border-radius: 8px;
+  color: white;
+  margin-bottom: 18px;
+}
+
+button {
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: #087fd5;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+button:hover {
+  background: #1599f5;
+}
+
+.result h2 {
+  margin: 22px 0;
+}
+
+#details {
+  line-height: 2.2;
+  color: #c4d7e9;
+  overflow-wrap: anywhere;
+}
+
+.status {
+  color: #36dc91;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.status.revoked {
+  color: #ff6868;
+}
+
+#certificateImage {
+  width: 100%;
+  margin: 25px 0;
+  border-radius: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+#qrCode {
+  display: flex;
+  justify-content: center;
+  margin: 25px;
+}
+
+.result small {
+  display: block;
+  text-align: center;
+  color: #9fb2c6;
+}
+
+.hidden {
+  display: none;
+}
+
+#message {
+  color: #ff7777;
+  margin-top: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #8297ad;
+  border-top: 1px solid #193653;
+}
+
+@media(max-width: 600px) {
+  header {
+    padding: 18px 5%;
+  }
+
+  .brand h2 {
+    font-size: 14px;
+  }
+
+  .hero {
+    margin: 45px auto;
+  }
+
+  .search-box,
+  .result {
+    padding: 20px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+
+.qr-section {
+  margin-top: 30px;
+  padding: 25px;
+  background: #071525;
+  border: 1px solid #315776;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.qr-section h3 {
+  color: #45baff;
+  margin-bottom: 10px;
+}
+
+.qr-section p {
+  color: #9fb2c6;
+  margin-bottom: 20px;
+}
+
+#qrCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  padding: 15px;
+  background: white;
+  width: fit-content;
+  border-radius: 10px;
+}
+
+#qrCode img,
+#qrCode canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.qr-section small {
+  display: block;
+  color: #9fb2c6;
+  margin-top: 12px;
+}
+
+#downloadQR {
+  max-width: 250px;
+}
+
+.status {
+  color: #36dc91;
+}
+
+.status.revoked {
+  color: #ff6868;
+}
+
+@media print {
+  header,
+  footer,
+  .search-box,
+  .actions,
+  .qr-section {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .hero {
+    margin: 0;
+  }
+
+  .result {
+    background: white;
+    color: black;
+    border: none;
+  }
+
+  #details {
+    color: black;
+  }
+}

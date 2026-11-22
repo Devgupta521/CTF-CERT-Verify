@@ -1,0 +1,48 @@
+
+{
+  "RDCF-CTF-2026-P001": {
+    "name": "Priyanka Princella",
+    "type": "Participation",
+    "event": "RD CyberForge CTF 2026",
+    "position": "Participant",
+    "issueDate": "2026-11-24",
+    "certificate": "certificates/Akshaya Pakala.jpeg",
+    "status": "Valid"
+  },
+  "RDCF-CTF-2026-W001": {
+    "name": "First Place Winner",
+    "type": "Winner",
+    "event": "RD CyberForge CTF 2026",
+    "position": "1st Place",
+    "issueDate": "2026-11-23",
+    "certificate": "certificates/M.Chandana Kumari.jpeg",
+    "status": "Valid"
+  },
+  "RDCF-CTF-2026-W002": {
+    "name": "Second Place Winner",
+    "type": "Winner",
+    "event": "RD CyberForge CTF 2026",
+    "position": "2nd Place",
+    "issueDate": "2026-11-23",
+    "certificate": "certificates/Priyanka Princella.jpeg",
+    "status": "Valid"
+  },
+  "RDCF-CTF-2026-W003": {
+    "name": "Third Place Winner",
+    "type": "Winner",
+    "event": "RD CyberForge CTF 2026",
+    "position": "3rd Place",
+    "issueDate": "2026-11-23",
+    "certificate": "certificates/ThanmayiSai.jpeg",
+    "status": "Valid"
+  },
+   "RDCF-CTF-2026-W004": {
+    "name": "Third Place Winner",
+    "type": "Winner",
+    "event": "RD CyberForge CTF 2026",
+    "position": "3rd Place",
+    "issueDate": "2026-11-23",
+    "certificate": "certificates/Nagaraj.jpeg",
+    "status": "Valid"
+  }
+}

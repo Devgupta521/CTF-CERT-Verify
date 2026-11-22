@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RD CyberForge | CTF Certificate Verification</title>
+
+  <meta name="description"
+    content="Official RD CyberForge CTF certificate verification portal.">
+
+  <meta name="theme-color" content="#06111f">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">RD</div>
+
+    <div>
+      <h2>RD CYBERFORGE</h2>
+      <small>LEARN. EXPLORE. SECURE.</small>
+    </div>
+  </div>
+
+  <a href="https://rdcyberforge.com" target="_blank"
+     rel="noopener noreferrer">
+    Main Website ↗
+  </a>
+</header>
+
+<section class="hero">
+
+  <div class="tag">OFFICIAL CTF VERIFICATION PORTAL</div>
+
+  <h1>Certificate <span>Verification</span></h1>
+
+  <p>
+    Verify the authenticity of Capture The Flag certificates
+    issued by RD CyberForge.
+  </p>
+
+  <div class="search-box">
+
+    <label for="certificateId">Enter Certificate ID</label>
+
+    <input
+      type="text"
+      id="certificateId"
+      placeholder="RDCF-CTF-2026-P001"
+      autocomplete="off"
+    >
+
+    <button id="verifyBtn" onclick="verifyCertificate()">
+      VERIFY CERTIFICATE
+    </button>
+
+    <p id="message" role="status" aria-live="polite"></p>
+
+  </div>
+
+  <!-- VERIFICATION RESULT -->
+
+  <div id="result" class="result hidden">
+
+    <div id="statusBadge" class="status"></div>
+
+    <h2>Certificate Details</h2>
+
+    <div id="details"></div>
+
+    <!-- CERTIFICATE IMAGE -->
+
+    <img
+      id="certificateImage"
+      alt="Verified RD CyberForge CTF certificate"
+      hidden
+    >
+
+    <!-- CERTIFICATE ACTIONS -->
+
+    <div class="actions">
+
+      <button id="downloadBtn">
+        DOWNLOAD CERTIFICATE
+      </button>
+
+      <button id="printBtn">
+        PRINT CERTIFICATE
+      </button>
+
+    </div>
+
+    <!-- QR VERIFICATION -->
+
+    <div class="qr-section">
+
+      <h3>QR Code Verification</h3>
+
+      <p>
+        Scan this QR code to verify the authenticity
+        of this certificate.
+      </p>
+
+      <div id="qrCode"></div>
+
+      <button id="downloadQR">
+        DOWNLOAD QR CODE
+      </button>
+
+      <small>
+        Each certificate has its own unique verification QR code.
+      </small>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <h3>RD CYBERFORGE</h3>
+
+  <p>LEARN. EXPLORE. SECURE.</p>
+
+  <p>
+    © 2026 RD CyberForge. All rights reserved.
+  </p>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
