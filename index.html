@@ -2,118 +2,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Official RD CyberForge Certificate Verification Portal">
+<title>Certificate Verification | RD CyberForge</title>
 
-  <title>RD CyberForge | CTF Certificate Verification</title>
+<style>
+* { box-sizing: border-box; }
 
-  <meta name="description"
-    content="Official RD CyberForge CTF certificate verification portal.">
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#080808,#151515,#242424);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    color: white;
+}
 
-  <meta name="theme-color" content="#06111f">
+.page { width: 100%; max-width: 560px; text-align: center; }
 
-  <link rel="stylesheet" href="style.css">
+.brand {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+.tagline {
+    font-size: 14px;
+    color: #b5b5b5;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    color: #111;
+    border-radius: 22px;
+    padding: 35px 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+}
+
+h1 { margin: 0; font-size: 26px; }
+
+.description {
+    margin: 12px 0 25px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+}
+
+input:focus { border-color: #111; }
+
+button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #111;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover { opacity: .9; }
+
+.footer {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #999;
+    line-height: 1.5;
+}
+
+@media(max-width:480px) {
+    body { padding: 15px; }
+    .card { padding: 28px 20px; }
+    .brand { font-size: 25px; }
+    h1 { font-size: 23px; }
+}
+</style>
 </head>
 
 <body>
+<div class="page">
 
-<header>
-  <div class="brand">
-    <div class="logo">RD</div>
+    <div class="brand">RD CYBERFORGE</div>
+    <div class="tagline">Cybersecurity Training & Learning</div>
 
-    <div>
-      <h2>RD CYBERFORGE</h2>
-      <small>LEARN. EXPLORE. SECURE.</small>
-    </div>
-  </div>
+    <div class="card">
+        <h1>Certificate Verification</h1>
 
-  <a href="https://rdcyberforge.com" target="_blank"
-     rel="noopener noreferrer">
-    Main Website ↗
-  </a>
-</header>
+        <p class="description">
+            Verify the authenticity of an RD CyberForge
+            certificate using the participant's Certificate ID.
+        </p>
 
-<section class="hero">
+        <input
+            type="text"
+            id="certificateID"
+            placeholder="Enter Certificate ID"
+            autocomplete="off"
+        >
 
-  <div class="tag">OFFICIAL CTF VERIFICATION PORTAL</div>
-
-  <h1>Certificate <span>Verification</span></h1>
-
-  <p>
-    Verify the authenticity of Capture The Flag certificates
-    issued by RD CyberForge.
-  </p>
-
-  <div class="search-box">
-
-    <label for="certificateId">Enter Certificate ID</label>
-
-    <input
-      type="text"
-      id="certificateId"
-      placeholder="RDCF-CTF-2026-P001"
-      autocomplete="off"
-    >
-
-    <button id="verifyBtn" onclick="verifyCertificate()">
-      VERIFY CERTIFICATE
-    </button>
-
-    <p id="message" role="status" aria-live="polite"></p>
-
-  </div>
-
-  <!-- VERIFICATION RESULT -->
-
-  <div id="result" class="result hidden">
-
-    <div id="statusBadge" class="status"></div>
-
-    <h2>Certificate Details</h2>
-
-    <div id="details"></div>
-
-    <!-- CERTIFICATE IMAGE -->
-
-    <img
-      id="certificateImage"
-      alt="Verified RD CyberForge CTF certificate"
-      hidden
-    >
-
-    <!-- CERTIFICATE ACTIONS -->
-
-    <div class="actions">
-
-      <button id="downloadBtn">
-        DOWNLOAD CERTIFICATE
-      </button>
-
-      <button id="printBtn">
-        PRINT CERTIFICATE
-      </button>
-
+        <button onclick="verifyCertificate()">
+            VERIFY CERTIFICATE
+        </button>
     </div>
 
-  </div>
+    <div class="footer">
+        © 2026 RD CyberForge<br>
+        Official Certificate Verification Portal
+    </div>
 
-</section>
+</div>
 
-<footer>
+<script>
 
-  <h3>RD CYBERFORGE</h3>
+// Automatically process QR verification links
+const params = new URLSearchParams(window.location.search);
+const qrID = params.get("id");
 
-  <p>LEARN. EXPLORE. SECURE.</p>
+if (qrID) {
+    document.getElementById("certificateID").value = qrID;
+    redirectToVerification(qrID);
+}
 
-  <p>
-    © 2026 RD CyberForge. All rights reserved.
-  </p>
+function redirectToVerification(id) {
+    window.location.replace(
+        "verify.html?id=" + encodeURIComponent(id)
+    );
+}
 
-</footer>
+function verifyCertificate() {
+    const id = document.getElementById("certificateID").value.trim();
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    if (!id) {
+        alert("Please enter Certificate ID.");
+        return;
+    }
 
-<script src="app.js"></script>
+    redirectToVerification(id);
+}
 
+document.getElementById("certificateID")
+.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        verifyCertificate();
+    }
+});
+
+</script>
 </body>
 </html>
